@@ -14,7 +14,7 @@ image:
   pullPolicy: IfNotPresent
 
 env:
-  SERVER_NAME: #
+  SERVER_NAME: #use dns name
   LOG_LEVEL: info
   AUTH_TYPE: AuthType None
   AUTH_TYPE2: AuthType None
