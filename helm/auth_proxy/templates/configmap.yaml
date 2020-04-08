@@ -26,7 +26,7 @@ data:
 
     LDAPCacheTTL ${LDAP_CACHE_TTL}
 
-    OIDCOAuthTokenIntrospectionInterval 60
+    OIDCOAuthTokenIntrospectionInterval 30
 
     <VirtualHost _default_:${HTTPD_PORT}>
         ErrorLog /dev/stdout
