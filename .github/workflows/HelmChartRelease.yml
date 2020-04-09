@@ -23,7 +23,6 @@ jobs:
         env:
           CR_TOKEN: "${{ secrets.CR_TOKEN }}"
         with:
-          charts_dir: "charts/auth_proxy/"
           charts_repo_url: "https://Fab-T.github.io/"
           charts_repo: "test-helm-repo"
-          index: "false"
+          toindex: "true"
