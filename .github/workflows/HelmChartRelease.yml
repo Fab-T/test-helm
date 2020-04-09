@@ -17,13 +17,11 @@ jobs:
         run: |
           git config user.name "$GITHUB_ACTOR"
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
-          echo "what is $GITHUB_TOKEN" > debug
-          cat debug
 
       - name: Run chart-releaser
         uses: Fab-T/chart-releaser-action@v1.0.0-rc.3
         env:
-          CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          CR_TOKEN: "${{ secrets.CR_TOKEN }}"
         with:
           charts_dir: "charts/auth_proxy/"
           charts_repo_url: "https://Fab-T.github.io/"
