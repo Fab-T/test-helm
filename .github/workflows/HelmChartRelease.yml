@@ -5,7 +5,7 @@ on:
     branches:
       - master
     paths:
-      - charts/**
+      - charts/auth_proxy/**
 
 jobs:
   release:
@@ -23,5 +23,5 @@ jobs:
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
           INPUT_CHARTS_REPO_URL: "https://Fab-T.github.io/test-helm-repo"
-          INPUT_CHARTS_DIR: "charts/"
+          INPUT_CHARTS_DIR: "charts/auth_proxy/"
           INPUT_VERSION: "0.0.1"
