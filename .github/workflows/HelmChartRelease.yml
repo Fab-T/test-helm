@@ -23,4 +23,5 @@ jobs:
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
           INPUT_CHARTS_REPO_URL: "https://Fab-T.github.io/test-helm-repo"
-          INPUT_CHARTS_DIR: "helm/auth_proxy/"
+          INPUT_CHARTS_DIR: "helm/"
+          INPUT_VERSION: "0.0.1"
