@@ -17,6 +17,8 @@ jobs:
         run: |
           git config user.name "$GITHUB_ACTOR"
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+          echo "what is $GITHUB_TOKEN" > debug
+          cat debug
 
       - name: Run chart-releaser
         uses: Fab-T/chart-releaser-action@v1.0.0-rc.3
