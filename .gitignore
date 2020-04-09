@@ -1,5 +1,5 @@
 #IDE
 .DS_Store
-helm/.DS_Store
-helm/.idea/
-helm/auth_proxy/.DS_Store
+charts/.DS_Store
+charts/.idea/
+charts/auth_proxy/.DS_Store
