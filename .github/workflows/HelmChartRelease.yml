@@ -19,8 +19,8 @@ jobs:
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
 
       - name: Run chart-releaser
-        uses: helm/chart-releaser-action@v1.0.0-rc.1
+        uses: helm/chart-releaser-action@v1.0.0-rc.2
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-          charts_repo_url: "https://Fab-T.github.io/test-helm-repo"
-          charts_dir: "helm/auth_proxy/"
+          INPUT_CHARTS_REPO_URL: "https://Fab-T.github.io/test-helm-repo"
+          INPUT_CHARTS_DIR: "helm/auth_proxy/"
