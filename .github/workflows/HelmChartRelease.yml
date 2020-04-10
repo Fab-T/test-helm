@@ -17,6 +17,7 @@ jobs:
         run: |
           git config user.name "$GITHUB_ACTOR"
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+          set -x
           gh_pages_worktree=$(mktemp -d)
           remote_url=https://github.com/Fab-T/test-helm-repo.git
           git remote add -t gh-pages remote2 $remote_url
