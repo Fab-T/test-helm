@@ -14,7 +14,7 @@ type: application
 
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
-# This is mandatory to update this version if you expect the chart to be published.
+# It is mandatory to update the version if you expect the chart to be published.
 version: 0.0.8
 
 # This is the version number of the application being deployed. This version number should be
