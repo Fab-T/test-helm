@@ -23,6 +23,7 @@ jobs:
           git remote add -t gh-pages remote2 $remote_url
           git remote -v
           git --version
+          git config --add worktree.guessRemote true
           git worktree add "$gh_pages_worktree" gh-pages
           touch index.yaml
           cp -f index.yaml "$gh_pages_worktree/index.yaml"
