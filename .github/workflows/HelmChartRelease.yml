@@ -1,11 +1,11 @@
-name: Helm Charts Release AuthProxy
+name: Helm Charts Release
 
 on:
   push:
     branches:
       - master
     paths:
-      - helm/auth_proxy/**
+      - helm/**
 
 jobs:
   release:
