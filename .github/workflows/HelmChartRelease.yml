@@ -5,7 +5,7 @@ on:
     branches:
       - master
     paths:
-      - helm/**
+      - helm/authproxy/**
 
 jobs:
   release:
@@ -22,7 +22,6 @@ jobs:
         env:
           CR_TOKEN: "${{ secrets.CR_TOKEN }}"
         with:
-          charts_dir: "helm"
           charts_repo_url: "https://Fab-T.github.io/"
           charts_repo: "test-helm-repo"
           toindex: "true"
