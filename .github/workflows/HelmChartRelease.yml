@@ -24,3 +24,4 @@ jobs:
         with:
           charts_repo_url: "https://Fab-T.github.io/"
           charts_repo: "test-helm-repo"
+          charts_dir: "helm"
