@@ -17,26 +17,6 @@ jobs:
         run: |
           git config user.name "$GITHUB_ACTOR"
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
-          set -x
-          gh_pages_worktree=$(mktemp -d)
-          remote_url=https://github.com/Fab-T/test-helm-repo.git
-          git remote add -t gh-pages remote2 $remote_url
-          git remote -v
-          git --version
-          git config --add worktree.guessRemote true
-          git fetch remote2
-          git worktree add "$gh_pages_worktree" gh-pages
-          touch index.yaml
-          cp -f index.yaml "$gh_pages_worktree/index.yaml"
-          pushd "$gh_pages_worktree" > /dev/null
-          git status
-          git add index.yaml
-          git commit --message="Update index.yaml" --signoff
-          git push https://x-access-token:${CR_TOKEN}@github.com/Fab-T/test-helm-repo HEAD:gh-pages
-          popd > /dev/null
-        env:
-          CR_TOKEN: "${{ secrets.CR_TOKEN }}"
-
       - name: Run chart-releaser
         uses: Fab-T/chart-releaser-action@v1.0.0-rc.3
         env:
