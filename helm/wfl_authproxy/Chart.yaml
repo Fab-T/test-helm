@@ -1,6 +1,6 @@
 apiVersion: v2
 name: wfl-authproxy
-description: A Helm chart to deploy oidc server on Kubernetes
+description: A Helm chart to deploy oidc server on Kubernetes in front of wfl
 
 # A chart can be either an 'application' or a 'library' chart.
 #
