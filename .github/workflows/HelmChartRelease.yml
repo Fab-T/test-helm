@@ -5,7 +5,7 @@ on:
     branches:
       - master
     paths:
-      - helm/authproxy/**
+      - helm/auth_proxy/**
 
 jobs:
   release:
@@ -24,4 +24,3 @@ jobs:
         with:
           charts_repo_url: "https://Fab-T.github.io/"
           charts_repo: "test-helm-repo"
-          toindex: "true"
