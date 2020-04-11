@@ -22,7 +22,8 @@ jobs:
           remote_url=https://github.com/Fab-T/test-helm-repo.git
           git remote add -t gh-pages remote2 $remote_url
           git remote -v
-          git worktree add --track gh-pages "$gh_pages_worktree" remote2/gh-pages
+          git --version
+          git worktree add "$gh_pages_worktree" gh-pages
           touch index.yaml
           cp -f index.yaml "$gh_pages_worktree/index.yaml"
           pushd "$gh_pages_worktree" > /dev/null
