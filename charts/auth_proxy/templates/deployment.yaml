@@ -1,0 +1,94 @@
+apiVersion: apps/v1  # Requires v1.9+ K8s node versions
+kind: Deployment
+metadata:
+  name: {{ include "authproxy.fullname" . }}
+  labels:
+    {{- include "authproxy.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  revisionHistoryLimit: {{ .Values.revisionHistoryLimit }}
+  selector:
+    matchLabels:
+      component: {{ include "authproxy.fullname" . }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: {{ .Values.strategy.maxSurge }}
+      maxUnavailable: {{ .Values.strategy.maxUnavailable }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "authproxy.fullname" . }}
+        component: {{ include "authproxy.fullname" . }}
+    spec:
+      serviceAccountName: {{ include "authproxy.serviceAccountName" . }}
+      containers:
+      - name: {{ .Chart.Name | quote }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.version }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy | quote }}
+        ports:
+          - name: http
+            containerPort: 80
+            protocol: TCP
+        livenessProbe:
+          httpGet:
+            scheme: HTTP
+            path: /engine/v1/status
+            port: 80
+          initialDelaySeconds: 45
+          periodSeconds: 10
+          timeoutSeconds: 3
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            scheme: HTTP
+            path: /engine/v1/status
+            port: 80
+          initialDelaySeconds: 45
+          periodSeconds: 10
+          timeoutSeconds: 3
+          failureThreshold: 3
+        env:
+          - name: SERVER_NAME
+            value: {{ .Values.env.SERVER_NAME | quote }}
+          - name: LOG_LEVEL
+            value: {{ .Values.env.LOG_LEVEL | quote }}
+          - name: AUTH_TYPE
+            value: {{ .Values.env.AUTH_TYPE | quote }}
+          - name: AUTH_TYPE2
+            value: {{ .Values.env.AUTH_TYPE2 | quote }}
+          - name: AUTH_REQUIRE
+            value: {{ .Values.env.AUTH_REQUIRE | quote }}
+          - name: AUTH_REQUIRE2
+            value: {{ .Values.env.AUTH_REQUIRE2 | quote }}
+          - name: PROXY_URL
+            value: {{ .Values.env.PROXY_URL | quote }}
+          - name: PROXY_URL2
+            value: {{ .Values.env.PROXY_URL2 | quote }}
+          - name: ENABLE_STACKDRIVER
+            value: {{ .Values.env.ENABLE_STACKDRIVER | quote }}
+          - name: ENABLE_REMOTEIP
+            value: {{ .Values.env.ENABLE_REMOTEIP | quote }}
+          - name: REMOTE_USER_CLAIM
+            value: {{ .Values.env.REMOTE_USER_CLAIM | quote }}
+          - name: CALLBACK_URI
+            value: {{ .Values.env.CALLBACK_URI | quote }}
+          - name: FILTER2
+            value: {{ .Values.env.FILTER2 | quote }}
+          - name: FILTER
+            value: {{ .Values.env.FILTER | quote }}
+          - name: PROXY_PATH
+            value: {{ .Values.env.PROXY_PATH | quote }}
+          - name: PROXY_PATH2
+            value: {{ .Values.env.PROXY_PATH2 | quote }}
+        volumeMounts:
+          - mountPath: /etc/apache2/sites-available/site.conf
+            name: siteconf
+            subPath: site.conf
+      volumes:
+        - name: siteconf
+          configMap:
+            name: {{ template "authproxy.fullname" . }}
+            items:
+              - key: siteconf
+                path: site.conf
