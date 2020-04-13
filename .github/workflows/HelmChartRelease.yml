@@ -20,7 +20,7 @@ jobs:
       - name: Run chart-releaser
         uses: broadinstitute/chart-releaser-action@v1.0.0-rc.3
         env:
-          CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          CR_TOKEN: "${{ secrets.CR_TOKEN }}"
         with:
           charts_dir: "helm"
           charts_repo_url: "https://Fab-T.github.io/"
