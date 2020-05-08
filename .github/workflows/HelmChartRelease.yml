@@ -18,8 +18,6 @@ jobs:
     - name: RetrieveToken
       id: Token
       env:
-        ROLE_ID: ${{ secrets.ROLE_ID }}
-        SECRET_ID: ${{ secrets.SECRET_ID }}
         VAULT_ADDR: ${{ secrets.VAULT_ADDR }}
       run: |
         # use vault token to read secret - api access token
