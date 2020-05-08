@@ -22,7 +22,7 @@ jobs:
       uses: helm/chart-testing-action@v1.0.0-rc.2
       with:
         command: lint
-        config: helm/ct.yaml
+        config: ct.yaml
     # The auto-generated names don't work for ct install
     # We will have to figure out a way to make sure generated
     # names don't have hyphen, otherwise we cannot run ct install
