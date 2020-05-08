@@ -3,7 +3,7 @@ name: Helm Charts Release
 on:
   push:
     branches:
-      - ft-read-token-from-vault
+      - master
     paths:
       - helm/**
 
