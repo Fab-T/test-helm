@@ -15,7 +15,7 @@ image:
 
 env:
   SERVER_NAME:  # DNS Name
-  LOG_LEVEL: warn
+  LOG_LEVEL: debug
   AUTH_TYPE: AuthType None
   AUTH_TYPE2: AuthType None
   AUTH_REQUIRE: Require all granted
