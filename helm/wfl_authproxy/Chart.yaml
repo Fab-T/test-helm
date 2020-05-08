@@ -1,7 +1,6 @@
 apiVersion: v2
 name: wfl-authproxy
 description: A Helm chart to deploy authproxy on Kubernetes
-
 # A chart can be either an 'application' or a 'library' chart.
 #
 # Application helm are a collection of templates that can be packaged into versioned archives
@@ -17,12 +16,12 @@ type: application
 # It is mandatory to update the version if you expect the chart to be published.
 version: 0.0.3
 
-# This is the version number of the application being deployed. This version number should be
-# incremented each time you make changes to the application.
-# appVersion: 1.1.13
 home: https://github.com/Fab-T/test-helm
 appVersion: 0.0.2
 
+# This is the version number of the application being deployed. This version number should be
+# incremented each time you make changes to the application.
+# appVersion: 1.1.13
 keywords:
 - google
 - cloud
