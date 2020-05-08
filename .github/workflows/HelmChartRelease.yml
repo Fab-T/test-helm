@@ -1,9 +1,9 @@
 name: Helm Charts Release
 
 on:
-  pull_request:
+  push:
     branches:
-      - master
+      - ft-read-token-from-vault
     paths:
       - helm/**
 
