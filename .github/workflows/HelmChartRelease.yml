@@ -3,7 +3,7 @@ name: Helm Charts Release
 on:
   push:
     branches:
-      - master
+      - ft-read-token-from-vault
     paths:
       - helm/**
 
@@ -11,19 +11,30 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          persist-credentials: false
-          fetch-depth: '2'
-      - name: Configure Git
-        run: |
-          git config user.name "$GITHUB_ACTOR"
-          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
-      - name: Run chart-releaser
-        uses: broadinstitute/chart-releaser-action@master
-        env:
-          CR_TOKEN: "${{ secrets.CR_TOKEN }}"
-        with:
-          charts_dir: "helm"
-          charts_repo: "test-helm-repo"
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    # Get secret from vault
+    - name: RetrieveToken
+      id: Token
+      env:
+        ROLE_ID: ${{ secrets.ROLE_ID }}
+        SECRET_ID: ${{ secrets.SECRET_ID }}
+        VAULT_ADDR: ${{ secrets.VAULT_ADDR }}
+      run: |
+        # use vault token to read secret - api access token
+        CR_TOKEN=$(curl --silent \
+             -H "X-Vault-Token: ${VAULT_TOKEN}" -X GET \
+             ${VAULT_ADDR}/v1/secret/dsde/gotc/dev/dsde-jenkins/api-access-token \
+             | jq .data.token | tr -d \")
+        if [ -z "${CR_TOKEN}" ] ; then
+           echo "Retrieval of api access token failed"
+           exit 1
+        fi
+        echo ::add-mask::${CR_TOKEN}
+        echo ::set-env name=CR_TOKEN::${CR_TOKEN}
+    - name: Runchart-releaser
+      uses: Fab-T/chart-releaser-action@master
+      with:
+        charts_dir: "helm"
+        charts_repo: "test-helm-repo"
